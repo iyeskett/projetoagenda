@@ -1,0 +1,72 @@
+<%- include('includes/head')%>
+  <%- include('includes/nav')%>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 my-3">
+          <h1 class="text-center">Agenda</h1>
+          <p class="text-center lead">Crie ou edite seu contato abaixo:</p>
+
+          <%- include('includes/messages') %>
+
+            <div class="col-lg">
+              <h4>Faça seu cadastro</h4>
+              <p>Se você ainda não tem conta, preencha o formulário abaixo:</p>
+
+              <% if(contato._id){ %>
+                <form action="/contato/edit/<%= contato._id %>" class="form-contato" method="post">
+                  <% } else { %>
+                    <form action="/contato/register" class="form-contato" method="post">
+                      <% } %>
+
+                        <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                        <div class="mb-3">
+                          <label class="form-label">Nome</label>
+                          <input value="<%= contato.nome %>" type="text" class="form-control" name="nome">
+
+                          <div class="alert-danger error error-nome" style="display: none;">
+
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Sobrenome</label>
+                          <input value="<%= contato.sobrenome %>" type="text" class="form-control" name="sobrenome">
+
+                          <div class="alert-danger error error-sobrenome" style="display: none;">
+
+                          </div>
+
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Email</label>
+                          <input value="<%= contato.email %>" type="email" class="form-control" name="email">
+
+                          <div class="alert-danger error error-email" style="display: none;">
+
+                          </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Telefone</label>
+                          <input value="<%= contato.telefone %>" type="tel" class="form-control" name="telefone">
+
+                          <div class="alert-danger error error-telefone" style="display: none;">
+
+                          </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+
+    <%- include('includes/footer')%>
